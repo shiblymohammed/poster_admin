@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
-  timeout: 10000,
+  timeout: 60000, // 60 seconds for Render free tier cold start
   headers: {
     'Content-Type': 'application/json',
   },

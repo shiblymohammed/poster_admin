@@ -50,7 +50,7 @@ function FrameManager() {
 
   const copyUrl = () => {
     if (campaign?.slug) {
-      const url = `http://localhost:5173/campaign/${campaign.slug}`;
+      const url = `http://localhost:5173/${campaign.slug}`;
       navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -59,7 +59,7 @@ function FrameManager() {
 
   const openCampaign = () => {
     if (campaign?.slug) {
-      window.open(`http://localhost:5173/campaign/${campaign.slug}`, '_blank');
+      window.open(`http://localhost:5173/${campaign.slug}`, '_blank');
     }
   };
 

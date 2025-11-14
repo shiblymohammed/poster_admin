@@ -57,7 +57,7 @@ function Dashboard() {
   };
 
   const copyUrl = (campaign) => {
-    const url = `http://localhost:5173/campaign/${campaign.slug}`;
+    const url = `http://localhost:5173/${campaign.slug}`;
     navigator.clipboard.writeText(url);
     setCopiedId(campaign.id);
     setTimeout(() => setCopiedId(null), 2000);
