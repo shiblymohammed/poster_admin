@@ -57,7 +57,8 @@ function Dashboard() {
   };
 
   const copyUrl = (campaign) => {
-    const url = `http://localhost:5173/${campaign.slug}`;
+    const userSiteUrl = import.meta.env.VITE_USER_SITE_URL || 'http://localhost:5173';
+    const url = `${userSiteUrl}/${campaign.slug}`;
     navigator.clipboard.writeText(url);
     setCopiedId(campaign.id);
     setTimeout(() => setCopiedId(null), 2000);

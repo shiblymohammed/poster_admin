@@ -50,7 +50,8 @@ function FrameManager() {
 
   const copyUrl = () => {
     if (campaign?.slug) {
-      const url = `http://localhost:5173/${campaign.slug}`;
+      const userSiteUrl = import.meta.env.VITE_USER_SITE_URL || 'http://localhost:5173';
+      const url = `${userSiteUrl}/${campaign.slug}`;
       navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -59,7 +60,8 @@ function FrameManager() {
 
   const openCampaign = () => {
     if (campaign?.slug) {
-      window.open(`http://localhost:5173/${campaign.slug}`, '_blank');
+      const userSiteUrl = import.meta.env.VITE_USER_SITE_URL || 'http://localhost:5173';
+      window.open(`${userSiteUrl}/${campaign.slug}`, '_blank');
     }
   };
 
