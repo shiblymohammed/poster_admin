@@ -1,0 +1,90 @@
+VERCEL DEPLOYMENT CHECKLIST - ADMIN PANEL
+==========================================
+
+PRE-DEPLOYMENT
+--------------
+[ ] Backend deployed on Render
+[ ] Backend URL ready
+[ ] GitHub account ready
+[ ] Vercel account created
+
+CODE PREPARATION
+----------------
+[ ] All API URLs use environment variables
+[ ] .env.example created
+[ ] .gitignore configured
+[ ] vercel.json created
+
+GITHUB SETUP
+------------
+[ ] Create repository: lapoaitools-admin-panel
+[ ] Push code to GitHub:
+    cd admin-panel
+    git init
+    git add .
+    git commit -m "Initial commit"
+    git branch -M main
+    git remote add origin https://github.com/YOUR_USERNAME/lapoaitools-admin-panel.git
+    git push -u origin main
+
+VERCEL DEPLOYMENT
+-----------------
+[ ] Import GitHub repository
+[ ] Framework: Vite
+[ ] Build Command: npm run build
+[ ] Output Directory: dist
+[ ] Environment Variable added:
+    [ ] VITE_API_URL = https://your-backend.onrender.com
+
+BACKEND CORS UPDATE
+-------------------
+[ ] Go to Render → Backend → Environment
+[ ] Update CORS_ALLOWED_ORIGINS:
+    [ ] Add: https://your-admin.vercel.app
+[ ] Save and redeploy backend
+
+VERIFICATION
+------------
+[ ] Build completed successfully
+[ ] Site accessible at Vercel URL
+[ ] Login page loads
+[ ] Login works (aseeb / Dr.aseeb123)
+[ ] Dashboard loads campaigns
+[ ] Campaign creation works
+[ ] Frame upload works
+[ ] Frame management works
+[ ] No console errors
+
+POST-DEPLOYMENT
+---------------
+[ ] Test all admin features
+[ ] Verify image uploads to Cloudinary
+[ ] Check campaign management
+[ ] Test frame operations
+[ ] Monitor for errors
+
+OPTIONAL
+--------
+[ ] Add custom domain
+[ ] Update backend CORS with custom domain
+[ ] Set up monitoring
+[ ] Enable analytics
+
+NOTES
+-----
+- Auto-deploys on git push to main
+- Preview deployments for all branches
+- Free tier includes 100GB bandwidth
+- HTTPS enabled automatically
+- Global CDN for fast loading
+
+ADMIN CREDENTIALS
+-----------------
+Username: aseeb
+Password: Dr.aseeb123
+
+URLS TO SAVE
+------------
+Production: https://your-admin.vercel.app
+Backend API: https://your-backend.onrender.com
+GitHub Repo: https://github.com/YOUR_USERNAME/lapoaitools-admin-panel
