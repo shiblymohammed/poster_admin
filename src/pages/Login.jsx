@@ -13,21 +13,56 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // CRITICAL DEBUG - This should appear immediately
+    console.log('=== FORM SUBMITTED ===');
+    console.log('Username:', username);
+    console.log('Password length:', password.length);
+    
     setError('');
     setLoading(true);
+
+    // Debug: Log API URL
+    console.log('API URL:', API_URL);
+    console.log('Login URL:', `${API_URL}/api/admin/login/`);
+    console.log('Attempting login... (may take 30-60s if backend is sleeping)');
 
     try {
       const response = await axios.post(`${API_URL}/api/admin/login/`, {
         username,
         password
+      }, {
+        timeout: 60000 // 60 seconds timeout for cold start
       });
 
+      console.log('Login successful!');
+      
       if (response.data.token) {
         localStorage.setItem('adminToken', response.data.token);
         navigate('/dashboard');
       }
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed. Please try again.');
+      console.error('Login error:', err);
+      console.error('Error response:', err.response?.data);
+      console.error('Error status:', err.response?.status);
+      console.error('Error code:', err.code);
+      console.error('Credentials sent:', { username, passwordLength: password.length });
+      
+      let errorMessage = 'Login failed. Please try again.';
+      
+      if (err.code === 'ECONNABORTED' || err.message.includes('timeout')) {
+        errorMessage = 'Request timeout. Backend may be sleeping (Render free tier). Please wait 30 seconds and try again.';
+      } else if (err.message === 'Network Error') {
+        errorMessage = 'Cannot connect to server. Backend may be down or URL is incorrect.';
+      } else if (err.response?.status === 400) {
+        errorMessage = 'Server configuration error (400). ALLOWED_HOSTS not configured on Render.';
+      } else if (err.response?.status === 401) {
+        errorMessage = 'Invalid credentials. Use: aseeb / Dr.aseeb123';
+      } else if (err.response?.data?.error) {
+        errorMessage = err.response.data.error;
+      }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

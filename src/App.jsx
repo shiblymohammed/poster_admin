@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import CreateCampaign from './pages/CreateCampaign';
 import FrameUpload from './pages/FrameUpload';
 import FrameManager from './pages/FrameManager';
+import EnvTest from './pages/EnvTest';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -46,6 +47,7 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        <Route path="/env-test" element={<EnvTest />} />
       </Routes>
     </Router>
   );

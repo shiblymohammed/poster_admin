@@ -1,0 +1,116 @@
+TEST LOGIN LOCALLY BEFORE DEPLOYING
+====================================
+
+The deployed version (posteradmin.lapoelectioncart.com) doesn't have your latest code changes!
+
+You need to either:
+1. Test locally first
+2. Deploy the changes to Vercel
+
+OPTION 1: TEST LOCALLY (RECOMMENDED)
+-------------------------------------
+
+1. Open terminal in admin-panel folder
+
+2. Create .env file:
+   copy .env.example .env
+
+3. Edit .env file:
+   VITE_API_URL=https://postermaker-backend.onrender.com
+
+4. Install dependencies (if not done):
+   npm install
+
+5. Start local server:
+   npm run dev
+
+6. Open browser:
+   http://localhost:5174
+
+7. Try to login:
+   Username: aseeb
+   Password: Dr.aseeb123
+
+8. Check console (F12):
+   - Should see "=== FORM SUBMITTED ==="
+   - Should see alert popup
+   - Should see API URL logs
+   - Should see network request
+
+OPTION 2: DEPLOY TO VERCEL
+---------------------------
+
+1. Commit changes:
+   cd admin-panel
+   git add .
+   git commit -m "Fix login function"
+   git push
+
+2. Vercel will auto-deploy (takes 2-3 minutes)
+
+3. Wait for deployment to complete
+
+4. Test on: https://posteradmin.lapoelectioncart.com
+
+5. Check console for logs
+
+CURRENT ISSUE
+-------------
+You're testing on the deployed site, but the deployed site has OLD CODE.
+
+The changes we made are only in your local files, not deployed yet!
+
+WHAT TO DO NOW
+--------------
+
+Choose one:
+
+A) Test Locally:
+   1. cd admin-panel
+   2. npm run dev
+   3. Open http://localhost:5174
+   4. Try login
+   5. Check console
+
+B) Deploy First:
+   1. Commit and push to GitHub
+   2. Wait for Vercel deployment
+   3. Test on live site
+
+DEBUGGING STEPS
+---------------
+
+If testing locally and still stuck:
+
+1. Check console immediately after clicking login
+2. Should see: "=== FORM SUBMITTED ==="
+3. Should see alert popup
+4. Should see API URL in console
+5. Should see network request in Network tab
+
+If you DON'T see these:
+- JavaScript error preventing function from running
+- Check console for any red errors
+- Check if React is loaded properly
+
+If you DO see these but still stuck:
+- Backend issue
+- Check what the network request returns
+- Check backend logs on Render
+
+QUICK TEST
+----------
+To verify the function works, add this to console:
+
+document.querySelector('form').addEventListener('submit', (e) => {
+  console.log('Form submit event fired!');
+});
+
+Then try to login. If you see "Form submit event fired!" but not "=== FORM SUBMITTED ===", 
+there's an issue with the handleSubmit function.
+
+MOST LIKELY CAUSE
+-----------------
+You're testing the deployed version which has old code!
+
+Solution: Test locally OR deploy changes first!
