@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import CreateCampaign from './pages/CreateCampaign';
+import CreateCampaign from './pages/CreateCampaignNew';
 import FrameUpload from './pages/FrameUpload';
 import FrameManager from './pages/FrameManager';
 import EnvTest from './pages/EnvTest';
