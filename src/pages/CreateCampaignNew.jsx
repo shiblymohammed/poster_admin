@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Plus, AlertCircle, Check, Upload, X, Image as ImageIcon } from 'lucide-react';
-import axios from 'axios';
-import { API_URL } from '../config/api';
+import axiosInstance from '../api/axios';
 
 function CreateCampaignNew() {
   const [campaignName, setCampaignName] = useState('');
@@ -55,19 +54,16 @@ function CreateCampaignNew() {
     setError('');
 
     try {
-      const token = localStorage.getItem('adminToken');
-      
       // Step 1: Create campaign with frame
       const campaignFormData = new FormData();
       campaignFormData.append('name', campaignName);
       campaignFormData.append('frame', frameFile);
 
-      const campaignResponse = await axios.post(
-        `${API_URL}/api/admin/campaign/`,
+      const campaignResponse = await axiosInstance.post(
+        '/api/admin/campaign/',
         campaignFormData,
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
           }
         }
@@ -81,12 +77,11 @@ function CreateCampaignNew() {
       posterFormData.append('name', 'Poster');
       posterFormData.append('is_default', 'true');
 
-      await axios.post(
-        `${API_URL}/api/admin/campaign/${campaignId}/posters/`,
+      await axiosInstance.post(
+        `/api/admin/campaign/${campaignId}/posters/`,
         posterFormData,
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
           }
         }
